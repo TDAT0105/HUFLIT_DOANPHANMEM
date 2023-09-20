@@ -1,0 +1,168 @@
+﻿@model DOAN.Models.Phong
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <style>
+        .sanpham {
+            display: flex;
+            align-items: center;
+        }
+
+            .sanpham img {
+                width: 600px;
+                margin-right: 20px;
+            }
+
+        .form {
+            width: 250px;
+            height: 380px;
+            background: white;
+            color: #000;
+            padding: 20px;
+        }
+
+            .form h2 {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .form h4 {
+                color: red;
+                margin: 0 0 10px 0;
+            }
+
+            .form p {
+                margin: 0 0 5px 0;
+            }
+
+        .btnn {
+            width: 240px;
+            height: 40px;
+            background: #0000CD;
+            border: none;
+            margin-top: 20px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #ADD8E6;
+            transition: 0.4s ease;
+            display: inline-block;
+            text-align: center;
+            line-height: 40px;
+            text-decoration: none;
+        }
+
+            .btnn:hover {
+                background: #ADD8E6;
+                color: #0000CD;
+            }
+
+            .btnn a {
+                color: #fff;
+                font-weight: bold;
+            }
+
+        .swiper-container {
+            width: 600px;
+            height: 400px;
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .swiper-slide {
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            transition: opacity 0.4s ease;
+        }
+
+            .swiper-slide img {
+                width: 100%;
+                height: 100%;
+            }
+
+            .swiper-slide.swiper-slide-active {
+                opacity: 1;
+            }
+
+        .radio-buttons {
+            display: flex;
+            margin-top: 10px;
+        }
+
+            .radio-buttons label {
+                margin-right: 10px;
+                cursor: pointer;
+            }
+
+            .radio-buttons input[type="radio"] {
+                display: none;
+            }
+
+                .radio-buttons input[type="radio"] + span {
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    display: inline-block;
+                    background-color: #ddd;
+                    margin-right: 5px;
+                    vertical-align: middle;
+                    cursor: pointer;
+                }
+
+                .radio-buttons input[type="radio"]:checked + span {
+                    background-color: #000;
+                }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+</head>
+<br />
+<br />
+<br />
+<div class="sanpham">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <label class="swiper-slide" for="radio1">
+                <img src="~/Content/images/@Model.ImagePhong1" width="600">
+            </label>
+            <label class="swiper-slide" for="radio2">
+                <img src="~/Content/images/@Model.ImagePhong2" width="600">
+            </label>
+            <label class="swiper-slide" for="radio3">
+                <img src="~/Content/images/@Model.ImagePhong3" width="600">
+            </label>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="form">
+        <h2>@Html.DisplayFor(model => model.TenPhong)</h2>
+        <h4>Giá: <strong>@String.Format("{0:0,0}", Model.Price)</strong></h4>
+        <p><strong>Diện tích:</strong></p>
+        <p><strong>@Html.DisplayFor(model => model.DienTich)</strong></p>
+        <p>Mô tả:</p>
+        <p>@Html.DisplayFor(model => model.Decription)</p>
+    </div>
+</div>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        autoplay: {
+            delay: 2000, // Tốc độ chuyển đổi hình ảnh (2 giây)
+        },
+    });
+</script>

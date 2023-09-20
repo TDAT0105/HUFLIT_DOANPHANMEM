@@ -1,0 +1,84 @@
+﻿@model IEnumerable<DOAN.Models.Phong>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Phòng</h2>
+
+<p>
+    @Html.ActionLink("Tạo Phòng mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên Phòng
+        </th>
+        <th>
+            Diện tích
+        </th>
+        <th>
+            Miêu tả
+        </th>
+        <th>
+            Giá
+        </th>
+        <th>
+            Trạng thái
+        </th>
+        <th>
+            Hình Phòng
+        </th>
+        <th>
+            Hình Phòng
+        </th>
+        <th>
+            Hình Phòng
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenPhong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DienTich)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Decription)
+        </td>
+
+        <td>     
+            @String.Format("{0:0,0}", item.Price) VNĐ
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.TrangThai)
+        </td>
+        <td>
+            <img src="~/Content/images/@item.ImagePhong1" width="60" />
+            <br />
+            @Html.DisplayFor(modelItem => item.ImagePhong1)
+        </td>
+        <td>
+            <img src="~/Content/images/@item.ImagePhong2" width="60" />
+            <br />
+            @Html.DisplayFor(modelItem => item.ImagePhong2)
+        </td>
+        <td>
+            <img src="~/Content/images/@item.ImagePhong3" width="60" />
+            <br />
+            @Html.DisplayFor(modelItem => item.ImagePhong3)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id=item.IDPhong }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id=item.IDPhong }) |
+            @Html.ActionLink("Xóa", "Delete", new { id=item.IDPhong })
+        </td>
+    </tr>
+}
+
+</table>

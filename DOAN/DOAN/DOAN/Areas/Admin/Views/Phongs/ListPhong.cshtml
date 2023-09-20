@@ -1,0 +1,48 @@
+﻿@model IEnumerable<DOAN.Models.Phong>
+
+@{
+    ViewBag.Title = "ListPhong";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutKhach.cshtml";
+}
+
+<style>
+    .main-content-pro {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+</style>
+<br />
+<div class="container">
+    
+    <br />
+    <br />
+    <div class="row">
+        <div class="main-content-pro">
+            <!-- in ra các sản phẩm-->
+            @foreach (var pro in Model)
+            {
+
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card-pro" style="color:white">
+                        <!--In hình sản phẩm lấy từ database-->
+                        <img src="~/Content/images/@pro.ImagePhong1" width="200" height="250" />
+                        <p>@Html.DisplayFor(model => pro.TenPhong)</p>
+                        <!--In giá sản phẩm lấy từ database-->
+                        <p>Đơn giá : <font color="red">@String.Format("{0:0,0}",pro.Price)</font></p>
+                        <p style="text-align: center;">
+                            <!--Nút để xem chi tiết đơn hàng-->
+                            <a class="btn btn-info" href="/Admin/Phongs/Details/@pro.IDPhong"> Chi tiết </a>
+                            <a class="btn btn-danger" href="/Admin/DatLichHens/Create/@pro.IDPhong"> Đặt lịch hẹn </a>
+                        </p>
+                    </div>
+                </div>
+
+
+            }
+        </div>
+    </div>
+
+</div>
+
+

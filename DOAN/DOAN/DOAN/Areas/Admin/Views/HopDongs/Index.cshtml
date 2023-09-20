@@ -1,0 +1,100 @@
+﻿@model IEnumerable<DOAN.Models.HopDong>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .total-amount {
+        position: fixed;
+        bottom: 5px;
+        right: 5px;
+        background-color: #f7f7f7;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
+<h2>Hợp đồng</h2>
+
+<p>
+    @Html.ActionLink("Tạo hợp đồng", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên khách thuê
+        </th>
+        <th>
+            Tên phòng
+        </th>
+        <th>
+            Tiền cọc
+        </th>
+        <th>
+            Ngày bắt đầu
+        </th>
+        <th>
+            Ngày kết thúc
+        </th>
+        <th>
+            Tình trạng
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.NameCus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phong.TenPhong)
+            </td>
+            <td>
+                @String.Format("{0:0,0}", item.TienCoc) VNĐ
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayBatDau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayKetThuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TinhTrang)
+            </td>
+            <td>
+                @if (item.TinhTrang == "Còn hiệu lực")
+                {
+                    @Html.ActionLink("Kết thúc", "EndContract", new { id = item.IDHopDong }, new { @class = "btn btn-danger" })
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.IDHopDong }) |
+                @if (item.TinhTrang == "Còn hiệu lực")
+                { 
+                @Html.ActionLink("Tạo Hóa Đơn", "Create", "HoaDons", new { idHopDong = item.IDHopDong }, null)
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="total-amount">
+    <table>
+        <tr>
+            <td>
+                <p><strong style="color:forestgreen">Tổng tiền cọc nhận được: @ViewBag.TotalReceivedDeposit VNĐ</strong><strong> | </strong></p>
+            </td>
+            <td>
+
+            </td>
+            <td>
+            <td>
+                <p style="color:red"><strong>Tổng tiền cọc phải trả: @ViewBag.TotalReturnableDeposit VNĐ</strong></p>
+            </td>
+        </tr>
+    </table>
+</div>

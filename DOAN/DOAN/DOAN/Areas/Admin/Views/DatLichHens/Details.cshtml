@@ -1,0 +1,66 @@
+﻿@model DOAN.Models.DatLichHen
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết lịch hẹn</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên khách
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTen)
+        </dd>
+
+        <dt>
+            Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailCus)
+        </dd>
+
+        <dt>
+            Số điện thoại
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SDT)
+        </dd>
+
+        <dt>
+            Ngày hẹn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayHen)
+        </dd>
+
+        <dt>
+            Giờ hẹn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioHen)
+        </dd>
+
+        <dt>
+            Tên phòng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phong.TenPhong)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa lịch hẹn", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Quay về", "Index")
+</p>

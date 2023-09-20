@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DOAN.Models.DatLichHen>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lịch hẹn</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Họ tên khách
+        </th>
+        <th>
+            Tên phòng
+        </th>
+        <th>
+            Email khách
+        </th>
+        <th>
+            Số điện thoại
+        </th>
+        <th>
+            Ngày hẹn
+        </th>
+        <th>
+            Giờ hẹn
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoTen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phong.TenPhong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailCus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SDT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayHen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GioHen)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>

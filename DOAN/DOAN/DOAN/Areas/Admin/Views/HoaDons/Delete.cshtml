@@ -1,0 +1,88 @@
+﻿@model DOAN.Models.HoaDon
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa hóa đơn</h2>
+
+<h3>Bạn có chắc muốn xóa hóa đơn này?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Ngày lập hóa đơn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayLapHD)
+        </dd>
+
+        <dt>
+            Tiền điện
+        </dt>
+
+        <dd>
+            @String.Format("{0:0,0}", Model.TienDien) VNĐ
+        </dd>
+
+        <dt>
+            Tiền nước
+        </dt>
+
+        <dd>
+            @String.Format("{0:0,0}", Model.TienNuoc) VNĐ
+        </dd>
+
+        <dt>
+            Tiền wifi
+        </dt>
+
+        <dd>
+            @String.Format("{0:0,0}", Model.TienWifi) VNĐ
+        </dd>
+
+        <dt>
+            Tổng tiền
+        </dt>
+
+        <dd>
+            @String.Format("{0:0,0}", Model.UnitPrice) VNĐ
+        </dd>
+
+        <dt>
+            Tình trạng hóa đơn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrang)
+        </dd>
+
+        <dt>
+            Tên khách thuê
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.NameCus)
+        </dd>
+
+        <dt>
+            Tên phòng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phong.TenPhong)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa hóa đơn" class="btn btn-danger" /> |
+            @Html.ActionLink("Quay về", "Index")
+        </div>
+    }
+</div>

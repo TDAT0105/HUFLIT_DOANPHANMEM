@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/css4.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div id="main">
+        <div id="header">
+            <a href=""><img src="" style="width:8%; height:8%" /></a>
+
+            <ul id="nav">
+                <li><a href="~/Admin/Phongs/ListPhong">Trang chủ</a></li>
+                @*<li><a href="">Giới thiệu</a></li>*@
+                @*<li><a href="">Dịch vụ</a></li>
+                    <li><a href="">Dự án</a></li>
+                    <li><a href="">Liên hệ</a></li>*@
+                <li><a href="~/Customers/LoginCus">Đăng Nhập</a></li>
+                <li class="format-hello">
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+
+        <div id="content">
+            <br />
+            @RenderBody();
+        </div>
+        <div class="footer-title">
+            <div class="social">
+                <h2>Theo Dõi Chúng Tôi</h2>
+
+                <div class="icons">
+                    <a href="https://portal.huflit.edu.vn/"><ion-icon name="logo-facebook"></ion-icon></a>
+                    <a href="https://portal.huflit.edu.vn/"><ion-icon name="logo-instagram"></ion-icon></a>
+                    <a href="https://portal.huflit.edu.vn/"><ion-icon name="logo-twitter"></ion-icon></a>
+                    <a href="https://portal.huflit.edu.vn/"><ion-icon name="logo-google"></ion-icon></a>
+                    <a href="https://portal.huflit.edu.vn/"><ion-icon name="logo-skype"></ion-icon></a>
+                </div>
+            </div>
+            <div class="help"></div>
+            <div class="contact_us"></div>
+
+            <div class="help">
+                <h2>Hướng Dẫn</h2>
+                <ul class="de-muc">
+                    <li><a href="https://portal.huflit.edu.vn/">Điều Khoản</a></li>
+                    <li><a href="https://portal.huflit.edu.vn/">Hướng Dẫn Mua Hàng</a></li>
+                    <li><a href="https://portal.huflit.edu.vn/">Chính Sách Đổi Trả Hàng</a></li>
+                    <li><a href="https://portal.huflit.edu.vn/">Bảo Mật Thông Tin Khách Hàng</a></li>
+                    <li><a href="https://portal.huflit.edu.vn/">Chính Sách Thanh Toán</a></li>
+                </ul>
+            </div>
+            <div class="contact_us">
+                <h2>Liên Hệ</h2>
+                <ul class="de-muc">
+                    <li><a href="https://portal.huflit.edu.vn/">Cơ sở 1: <span style="font-weight: bold;">828 Sư Vạn Hạnh, phường 13, quận 10, TPHCM</span></a></li>
+                    <li><a href="https://portal.huflit.edu.vn/">Cơ sở 2: <span style="font-weight: bold;">10 Quốc Lộ 22, phường Tân Xuân, thị trấn Hóc Môn, TPHCM</span></a></li>
+
+                    <li><a href="">Điện Thoại: <span style="font-weight: bold;">0123456789</span></a></li>
+
+                    <li>
+                        <a>
+                            Email: <span style="font-weight: bold;">nhadep@gmail.com</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+</html>

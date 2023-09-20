@@ -1,0 +1,548 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PTroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NameUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoleUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="PasswordUser" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CCCD" />
+          </Key>
+          <Property Name="CCCD" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="IDPhong" Type="int" Nullable="false" />
+          <Property Name="NameCus" Type="nvarchar" MaxLength="50" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="5" />
+          <Property Name="PhoneCus" Type="nvarchar" MaxLength="15" />
+          <Property Name="EmailCus" Type="nvarchar" MaxLength="50" />
+          <Property Name="TinhTrangThue" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DatLichHen">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailCus" Type="nvarchar" MaxLength="50" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="15" />
+          <Property Name="IDPhong" Type="int" />
+          <Property Name="NgayHen" Type="date" />
+          <Property Name="GioHen" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="HoaDon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CCCD" Type="varchar" MaxLength="12" />
+          <Property Name="IDPhong" Type="int" />
+          <Property Name="NgayLapHD" Type="date" />
+          <Property Name="TienDien" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TienNuoc" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TienWifi" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UnitPrice" Type="float" />
+          <Property Name="TinhTrang" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="HopDong">
+          <Key>
+            <PropertyRef Name="IDHopDong" />
+          </Key>
+          <Property Name="IDHopDong" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CCCD" Type="varchar" MaxLength="12" />
+          <Property Name="IDPhong" Type="int" />
+          <Property Name="NgayBatDau" Type="date" />
+          <Property Name="NgayKetThuc" Type="date" />
+          <Property Name="TienCoc" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TinhTrang" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Phong">
+          <Key>
+            <PropertyRef Name="IDPhong" />
+          </Key>
+          <Property Name="IDPhong" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenPhong" Type="nvarchar" MaxLength="50" />
+          <Property Name="DienTich" Type="nvarchar" MaxLength="100" />
+          <Property Name="Decription" Type="nvarchar" MaxLength="200" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImagePhong1" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImagePhong2" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImagePhong3" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ThanhToan">
+          <Key>
+            <PropertyRef Name="IDThanhToan" />
+          </Key>
+          <Property Name="IDThanhToan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDHoaDon" Type="int" />
+          <Property Name="NgayThanhToan" Type="date" />
+        </EntityType>
+        <Association Name="FK__Customer__IDPhon__29572725">
+          <End Role="Phong" Type="Self.Phong" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phong">
+              <PropertyRef Name="IDPhong" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="IDPhong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatLichHe__IDPho__35BCFE0A">
+          <End Role="Phong" Type="Self.Phong" Multiplicity="0..1" />
+          <End Role="DatLichHen" Type="Self.DatLichHen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phong">
+              <PropertyRef Name="IDPhong" />
+            </Principal>
+            <Dependent Role="DatLichHen">
+              <PropertyRef Name="IDPhong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HoaDon__CCCD__300424B4">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CCCD" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="CCCD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HoaDon__IDPhong__30F848ED">
+          <End Role="Phong" Type="Self.Phong" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phong">
+              <PropertyRef Name="IDPhong" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="IDPhong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HopDong__CCCD__2C3393D0">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="HopDong" Type="Self.HopDong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CCCD" />
+            </Principal>
+            <Dependent Role="HopDong">
+              <PropertyRef Name="CCCD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HopDong__IDPhong__2D27B809">
+          <End Role="Phong" Type="Self.Phong" Multiplicity="0..1" />
+          <End Role="HopDong" Type="Self.HopDong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phong">
+              <PropertyRef Name="IDPhong" />
+            </Principal>
+            <Dependent Role="HopDong">
+              <PropertyRef Name="IDPhong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ThanhToan__IDHoa__32E0915F">
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="0..1" />
+          <End Role="ThanhToan" Type="Self.ThanhToan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoaDon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThanhToan">
+              <PropertyRef Name="IDHoaDon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PTroModelStoreContainer">
+          <EntitySet Name="AdminUser" EntityType="Self.AdminUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DatLichHen" EntityType="Self.DatLichHen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HopDong" EntityType="Self.HopDong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phong" EntityType="Self.Phong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThanhToan" EntityType="Self.ThanhToan" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Customer__IDPhon__29572725" Association="Self.FK__Customer__IDPhon__29572725">
+            <End Role="Phong" EntitySet="Phong" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatLichHe__IDPho__35BCFE0A" Association="Self.FK__DatLichHe__IDPho__35BCFE0A">
+            <End Role="Phong" EntitySet="Phong" />
+            <End Role="DatLichHen" EntitySet="DatLichHen" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HoaDon__CCCD__300424B4" Association="Self.FK__HoaDon__CCCD__300424B4">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="HoaDon" EntitySet="HoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HoaDon__IDPhong__30F848ED" Association="Self.FK__HoaDon__IDPhong__30F848ED">
+            <End Role="Phong" EntitySet="Phong" />
+            <End Role="HoaDon" EntitySet="HoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HopDong__CCCD__2C3393D0" Association="Self.FK__HopDong__CCCD__2C3393D0">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="HopDong" EntitySet="HopDong" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HopDong__IDPhong__2D27B809" Association="Self.FK__HopDong__IDPhong__2D27B809">
+            <End Role="Phong" EntitySet="Phong" />
+            <End Role="HopDong" EntitySet="HopDong" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ThanhToan__IDHoa__32E0915F" Association="Self.FK__ThanhToan__IDHoa__32E0915F">
+            <End Role="HoaDon" EntitySet="HoaDon" />
+            <End Role="ThanhToan" EntitySet="ThanhToan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PTroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdminUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NameUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordUser" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CCCD" />
+          </Key>
+          <Property Name="CCCD" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDPhong" Type="Int32" Nullable="false" />
+          <Property Name="NameCus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GioiTinh" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneCus" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="EmailCus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TinhTrangThue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Phong" Relationship="Self.FK__Customer__IDPhon__29572725" FromRole="Customer" ToRole="Phong" />
+          <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__CCCD__300424B4" FromRole="Customer" ToRole="HoaDon" />
+          <NavigationProperty Name="HopDongs" Relationship="Self.FK__HopDong__CCCD__2C3393D0" FromRole="Customer" ToRole="HopDong" />
+        </EntityType>
+        <EntityType Name="DatLichHen">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailCus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="IDPhong" Type="Int32" />
+          <Property Name="NgayHen" Type="DateTime" Precision="0" />
+          <Property Name="GioHen" Type="Time" Precision="7" />
+          <NavigationProperty Name="Phong" Relationship="Self.FK__DatLichHe__IDPho__35BCFE0A" FromRole="DatLichHen" ToRole="Phong" />
+        </EntityType>
+        <EntityType Name="HoaDon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CCCD" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="IDPhong" Type="Int32" />
+          <Property Name="NgayLapHD" Type="DateTime" Precision="0" />
+          <Property Name="TienDien" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TienNuoc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TienWifi" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UnitPrice" Type="Double" />
+          <Property Name="TinhTrang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__HoaDon__CCCD__300424B4" FromRole="HoaDon" ToRole="Customer" />
+          <NavigationProperty Name="Phong" Relationship="Self.FK__HoaDon__IDPhong__30F848ED" FromRole="HoaDon" ToRole="Phong" />
+          <NavigationProperty Name="ThanhToans" Relationship="Self.FK__ThanhToan__IDHoa__32E0915F" FromRole="HoaDon" ToRole="ThanhToan" />
+        </EntityType>
+        <EntityType Name="HopDong">
+          <Key>
+            <PropertyRef Name="IDHopDong" />
+          </Key>
+          <Property Name="IDHopDong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CCCD" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="IDPhong" Type="Int32" />
+          <Property Name="NgayBatDau" Type="DateTime" Precision="0" />
+          <Property Name="NgayKetThuc" Type="DateTime" Precision="0" />
+          <Property Name="TienCoc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TinhTrang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__HopDong__CCCD__2C3393D0" FromRole="HopDong" ToRole="Customer" />
+          <NavigationProperty Name="Phong" Relationship="Self.FK__HopDong__IDPhong__2D27B809" FromRole="HopDong" ToRole="Phong" />
+        </EntityType>
+        <EntityType Name="Phong">
+          <Key>
+            <PropertyRef Name="IDPhong" />
+          </Key>
+          <Property Name="IDPhong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenPhong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DienTich" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Decription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePhong1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePhong2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePhong3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK__Customer__IDPhon__29572725" FromRole="Phong" ToRole="Customer" />
+          <NavigationProperty Name="DatLichHens" Relationship="Self.FK__DatLichHe__IDPho__35BCFE0A" FromRole="Phong" ToRole="DatLichHen" />
+          <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__IDPhong__30F848ED" FromRole="Phong" ToRole="HoaDon" />
+          <NavigationProperty Name="HopDongs" Relationship="Self.FK__HopDong__IDPhong__2D27B809" FromRole="Phong" ToRole="HopDong" />
+        </EntityType>
+        <EntityType Name="ThanhToan">
+          <Key>
+            <PropertyRef Name="IDThanhToan" />
+          </Key>
+          <Property Name="IDThanhToan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDHoaDon" Type="Int32" />
+          <Property Name="NgayThanhToan" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="HoaDon" Relationship="Self.FK__ThanhToan__IDHoa__32E0915F" FromRole="ThanhToan" ToRole="HoaDon" />
+        </EntityType>
+        <Association Name="FK__Customer__IDPhon__29572725">
+          <End Role="Phong" Type="Self.Phong" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phong">
+              <PropertyRef Name="IDPhong" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="IDPhong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HoaDon__CCCD__300424B4">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CCCD" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="CCCD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HopDong__CCCD__2C3393D0">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="HopDong" Type="Self.HopDong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CCCD" />
+            </Principal>
+            <Dependent Role="HopDong">
+              <PropertyRef Name="CCCD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatLichHe__IDPho__35BCFE0A">
+          <End Role="Phong" Type="Self.Phong" Multiplicity="0..1" />
+          <End Role="DatLichHen" Type="Self.DatLichHen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phong">
+              <PropertyRef Name="IDPhong" />
+            </Principal>
+            <Dependent Role="DatLichHen">
+              <PropertyRef Name="IDPhong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HoaDon__IDPhong__30F848ED">
+          <End Role="Phong" Type="Self.Phong" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phong">
+              <PropertyRef Name="IDPhong" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="IDPhong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ThanhToan__IDHoa__32E0915F">
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="0..1" />
+          <End Role="ThanhToan" Type="Self.ThanhToan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoaDon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThanhToan">
+              <PropertyRef Name="IDHoaDon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HopDong__IDPhong__2D27B809">
+          <End Role="Phong" Type="Self.Phong" Multiplicity="0..1" />
+          <End Role="HopDong" Type="Self.HopDong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phong">
+              <PropertyRef Name="IDPhong" />
+            </Principal>
+            <Dependent Role="HopDong">
+              <PropertyRef Name="IDPhong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PTroEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminUsers" EntityType="Self.AdminUser" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="DatLichHens" EntityType="Self.DatLichHen" />
+          <EntitySet Name="HoaDons" EntityType="Self.HoaDon" />
+          <EntitySet Name="HopDongs" EntityType="Self.HopDong" />
+          <EntitySet Name="Phongs" EntityType="Self.Phong" />
+          <EntitySet Name="ThanhToans" EntityType="Self.ThanhToan" />
+          <AssociationSet Name="FK__Customer__IDPhon__29572725" Association="Self.FK__Customer__IDPhon__29572725">
+            <End Role="Phong" EntitySet="Phongs" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HoaDon__CCCD__300424B4" Association="Self.FK__HoaDon__CCCD__300424B4">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="HoaDon" EntitySet="HoaDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HopDong__CCCD__2C3393D0" Association="Self.FK__HopDong__CCCD__2C3393D0">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="HopDong" EntitySet="HopDongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatLichHe__IDPho__35BCFE0A" Association="Self.FK__DatLichHe__IDPho__35BCFE0A">
+            <End Role="Phong" EntitySet="Phongs" />
+            <End Role="DatLichHen" EntitySet="DatLichHens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HoaDon__IDPhong__30F848ED" Association="Self.FK__HoaDon__IDPhong__30F848ED">
+            <End Role="Phong" EntitySet="Phongs" />
+            <End Role="HoaDon" EntitySet="HoaDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ThanhToan__IDHoa__32E0915F" Association="Self.FK__ThanhToan__IDHoa__32E0915F">
+            <End Role="HoaDon" EntitySet="HoaDons" />
+            <End Role="ThanhToan" EntitySet="ThanhToans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HopDong__IDPhong__2D27B809" Association="Self.FK__HopDong__IDPhong__2D27B809">
+            <End Role="Phong" EntitySet="Phongs" />
+            <End Role="HopDong" EntitySet="HopDongs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PTroModelStoreContainer" CdmEntityContainer="PTroEntities3">
+          <EntitySetMapping Name="AdminUsers">
+            <EntityTypeMapping TypeName="PTroModel.AdminUser">
+              <MappingFragment StoreEntitySet="AdminUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NameUser" ColumnName="NameUser" />
+                <ScalarProperty Name="RoleUser" ColumnName="RoleUser" />
+                <ScalarProperty Name="PasswordUser" ColumnName="PasswordUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="PTroModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
+                <ScalarProperty Name="IDPhong" ColumnName="IDPhong" />
+                <ScalarProperty Name="NameCus" ColumnName="NameCus" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="PhoneCus" ColumnName="PhoneCus" />
+                <ScalarProperty Name="EmailCus" ColumnName="EmailCus" />
+                <ScalarProperty Name="TinhTrangThue" ColumnName="TinhTrangThue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DatLichHens">
+            <EntityTypeMapping TypeName="PTroModel.DatLichHen">
+              <MappingFragment StoreEntitySet="DatLichHen">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="EmailCus" ColumnName="EmailCus" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="IDPhong" ColumnName="IDPhong" />
+                <ScalarProperty Name="NgayHen" ColumnName="NgayHen" />
+                <ScalarProperty Name="GioHen" ColumnName="GioHen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HoaDons">
+            <EntityTypeMapping TypeName="PTroModel.HoaDon">
+              <MappingFragment StoreEntitySet="HoaDon">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
+                <ScalarProperty Name="IDPhong" ColumnName="IDPhong" />
+                <ScalarProperty Name="NgayLapHD" ColumnName="NgayLapHD" />
+                <ScalarProperty Name="TienDien" ColumnName="TienDien" />
+                <ScalarProperty Name="TienNuoc" ColumnName="TienNuoc" />
+                <ScalarProperty Name="TienWifi" ColumnName="TienWifi" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HopDongs">
+            <EntityTypeMapping TypeName="PTroModel.HopDong">
+              <MappingFragment StoreEntitySet="HopDong">
+                <ScalarProperty Name="IDHopDong" ColumnName="IDHopDong" />
+                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
+                <ScalarProperty Name="IDPhong" ColumnName="IDPhong" />
+                <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+                <ScalarProperty Name="TienCoc" ColumnName="TienCoc" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phongs">
+            <EntityTypeMapping TypeName="PTroModel.Phong">
+              <MappingFragment StoreEntitySet="Phong">
+                <ScalarProperty Name="IDPhong" ColumnName="IDPhong" />
+                <ScalarProperty Name="TenPhong" ColumnName="TenPhong" />
+                <ScalarProperty Name="DienTich" ColumnName="DienTich" />
+                <ScalarProperty Name="Decription" ColumnName="Decription" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="ImagePhong1" ColumnName="ImagePhong1" />
+                <ScalarProperty Name="ImagePhong2" ColumnName="ImagePhong2" />
+                <ScalarProperty Name="ImagePhong3" ColumnName="ImagePhong3" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThanhToans">
+            <EntityTypeMapping TypeName="PTroModel.ThanhToan">
+              <MappingFragment StoreEntitySet="ThanhToan">
+                <ScalarProperty Name="IDThanhToan" ColumnName="IDThanhToan" />
+                <ScalarProperty Name="IDHoaDon" ColumnName="IDHoaDon" />
+                <ScalarProperty Name="NgayThanhToan" ColumnName="NgayThanhToan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

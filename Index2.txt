@@ -1,0 +1,75 @@
+
+ 
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhóm 9 - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @{ var c = Session["Customer"].ToString() ;
+        var a = Session["Admin"].ToString();
+          }
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Trang chủ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Về chúng tôi", "About", "Home")</li>
+                    <li>@Html.ActionLink("Chi tiết hóa đơn","index","HoadonCus")</li>
+                    @{
+                        if (c != "" || a != "")
+                        {
+
+                            <div class="col-sm-4 col-md-0" style="color:white;">
+                            <li> Xin chào : @Session["Name"]</li>
+
+
+                            </div>
+                            <li>@Html.ActionLink("Đăng xuất", "logout", "home")</li>
+
+                        }
+
+
+                        else
+                        {
+                            <li><a href="/login">Đăng nhập</a></li>
+                            <li>@Html.ActionLink("Đăng ký", "Register", "Home")</li>
+                        }
+
+
+                    }
+                    @*RedirectToAction( "auth/login" , "admin", new { area = "" })*@
+                </ul>
+                <ul class="nav navbar-nav navbar-right" >
+                    <a href="~/Cart/ShowToCart"><img src="@Url.Content("~/Content/images/cart.png")" style="height:40px; width=40px;" /></a>
+                    @Html.Action("BagCart","Cart")
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,114 @@
+﻿@model IEnumerable<DOAN.Models.HoaDon>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .total-amount {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #f7f7f7;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<h2>Hóa đơn</h2>
+@using (Html.BeginForm("Index", "HoaDons", FormMethod.Get))
+{
+    <p>
+        Từ ngày: @Html.TextBox("fromDate", ViewBag.FromDate as DateTime?, new { type = "date" })
+        Đến ngày: @Html.TextBox("toDate", ViewBag.ToDate as DateTime?, new { type = "date" })
+        Tình trạng:
+        @Html.DropDownList("tinhTrangFilter", new SelectList(new List<string> { "Tất cả", "Chưa thanh toán", "Đã thanh toán" }), "Chọn tình trạng")
+        <input type="submit" value="Lọc" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            ID hóa đơn
+        </th>
+        <th>
+            Tên phòng
+        </th>
+        <th>
+            Tên khách thuê
+        </th>
+        <th>
+            Ngày lập hóa đơn
+        </th>
+        <th>
+            Tiền điện
+        </th>
+        <th>
+            Tiền nước
+        </th>
+        <th>
+            Tiền wifi
+        </th>
+        <th>
+            Tổng tiền
+        </th>
+        <th>
+            Tình trạng hóa đơn
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phong.TenPhong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.NameCus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayLapHD)
+            </td>
+            <td>
+                @String.Format("{0:0,0}", item.TienDien) VNĐ
+            </td>
+            <td>
+                @String.Format("{0:0,0}", item.TienNuoc) VNĐ
+            </td>
+            <td>
+                @String.Format("{0:0,0}", item.TienWifi) VNĐ
+            </td>
+            <td>
+                @String.Format("{0:0,0}", item.UnitPrice) VNĐ
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TinhTrang)
+            </td>
+            <td>
+                @if (item.TinhTrang == "Chưa thanh toán")
+                {
+                    using (Html.BeginForm("Pay", "HoaDons", new { id = item.ID }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-primary">Thanh toán</button>
+                    }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="total-amount">
+    <strong style="color:forestgreen">Tổng tiền các hóa đơn đã thanh toán: @ViewBag.TotalPaidAmount.ToString("N0") VNĐ</strong>
+</div>

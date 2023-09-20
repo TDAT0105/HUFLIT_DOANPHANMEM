@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DOAN.Models.ThanhToan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thanh toán</h2>
+@using (Html.BeginForm("Index", "ThanhToans", FormMethod.Get))
+{
+    <p>
+        Từ ngày: @Html.TextBox("fromDate", ViewBag.FromDate as DateTime?, new { type = "date" })
+        Đến ngày: @Html.TextBox("toDate", ViewBag.ToDate as DateTime?, new { type = "date" })
+        <input type="submit" value="Lọc" />
+    </p>
+}
+<p>
+    @Html.ActionLink("Thêm thanh toán", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            ID Hóa đơn
+        </th>
+        <th>
+            Ngày thanh toán
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoaDon.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayThanhToan)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.IDThanhToan }) |
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.IDThanhToan }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.IDThanhToan })
+            </td>
+        </tr>
+    }
+
+</table>

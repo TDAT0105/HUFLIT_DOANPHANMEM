@@ -1,0 +1,72 @@
+﻿@model DOAN.Models.DatLichHen
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa lịch hẹn</h2>
+
+<h3>Bạn có chắc muốn xóa lịch hẹn này</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên khách
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTen)
+        </dd>
+
+        <dt>
+            Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailCus)
+        </dd>
+
+        <dt>
+            Số điện thoại
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SDT)
+        </dd>
+
+        <dt>
+            Ngày hẹn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayHen)
+        </dd>
+
+        <dt>
+            Giờ hẹn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioHen)
+        </dd>
+
+        <dt>
+            Tên phòng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phong.TenPhong)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa lịch hẹn" class="btn btn-danger" /> |
+            @Html.ActionLink("Quay về", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,91 @@
+﻿@{
+    Layout = null; // Bỏ qua layout chung
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trang đăng nhập</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-text,
+        .input-password {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Thêm thuộc tính này */
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .btn:hover {
+                background-color: #45a049;
+            }
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+    {
+        <div class="container">
+
+            <h2>Đăng nhập</h2>
+            <div class="form-group">
+                <label for="username">Tên đăng nhập:</label>
+                <input type="text" name="username" class="input-text" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mật khẩu:</label>
+                <input type="password" name="password" class="input-password" required>
+            </div>
+            <input type="submit" value="Đăng nhập" class="btn">
+            <div>
+
+            </div>
+            <div class="form-group">
+                <span class="text-danger">@ViewBag.Error</span>
+            </div>
+        </div>
+
+    }
+</body>
+</html>
+

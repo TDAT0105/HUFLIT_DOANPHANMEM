@@ -1,10 +1,54 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Trang Web Đơn Giản</title>
+    <title>Trang Web Bán Hàng</title>
 </head>
 <body>
-    <h1>Chào mừng bạn đến với trang web đơn giản!</h1>
-    <p>Đây là một trang web HTML cơ bản.</p>
+    <header>
+        <h1>Chào mừng bạn đến với cửa hàng của chúng tôi!</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Sản phẩm</a></li>
+                <li><a href="#">Giỏ hàng</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="products">
+        <article class="product">
+            <img src="product1.jpg" alt="Sản phẩm 1">
+            <h2>Sản phẩm 1</h2>
+            <p>Mô tả sản phẩm 1.</p>
+            <p>Giá: $100</p>
+            <button>Mua hàng</button>
+        </article>
+
+        <article class="product">
+            <img src="product2.jpg" alt="Sản phẩm 2">
+            <h2>Sản phẩm 2</h2>
+            <p>Mô tả sản phẩm 2.</p>
+            <p>Giá: $150</p>
+            <button>Mua hàng</button>
+        </article>
+
+        <!-- Thêm các sản phẩm khác ở đây -->
+    </section>
+
+    <section id="cart">
+        <h2>Giỏ hàng</h2>
+        <ul>
+            <!-- Danh sách sản phẩm trong giỏ hàng -->
+            <li>Sản phẩm 1 - $100</li>
+            <li>Sản phẩm 2 - $150</li>
+        </ul>
+        <p>Tổng cộng: $250</p>
+        <button>Thanh toán</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Trang Web Bán Hàng</p>
+    </footer>
 </body>
 </html>
